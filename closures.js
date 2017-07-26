@@ -244,8 +244,8 @@ var isNotAFriend = findPotentialFriends( friends );
 method, find all potential second level friends as well as potential friends
 from allUsers. */
 
-var potentialSecondLevelFriends = "?";
-var allPotentialFriends = "?";
+var potentialSecondLevelFriends = findPotentialFriends(allUsers.filter(function (friends) {return allUsers} ))
+var allPotentialFriends = findPotentialFriends(secondLevelFriends.filter(function (allUsers) {return secondLevelFriends} ))
 
 
 /******************************************************************************\
