@@ -15,9 +15,9 @@ closure over the name variable. Invoke outer saving the return value into
 another variable called 'inner'. */
 
 // Code Here
-
+let inner = outer()
 //Once you do that, invoke inner.
-
+inner()
 //Code Here
 
 
@@ -48,9 +48,10 @@ in your console. */
 
   //Code Here
 
+let callJake = callFriend("Jake")
+callJake('435-215-9248')
 
-
-
+console.log(callJake)
 
 
 
@@ -66,12 +67,24 @@ properly. */
 
 //Code Here
 
-//Uncomment this once you make your function
-//   var count = makeCounter();
-//   count(); // 1
-//   count(); // 2
-//   count(); // 3
-//   count(); // 4
+function makeCounter() {
+  var counter = 0;
+
+  function add() {
+    counter = counter + 1;
+
+    return counter
+  }
+
+  return add
+}
+
+
+   var count = makeCounter();
+   count(); // 1
+   count(); // 2
+   count(); // 3
+   count(); // 4
 
 
 
@@ -98,10 +111,19 @@ http://stackoverflow.com/questions/17776940/javascript-module-pattern-with-examp
 
 function counterFactory(value) {
 
-  // Code here.
 
 
   return {
+    inc:function(){
+    value = value + 1;
+
+    return value
+  },
+    dec:function(){
+      value = value-1;
+      return value
+    }
+  
   }
 }
 
@@ -134,10 +156,12 @@ function motivation(firstname, lastname) {
   var welcomeText = 'You\'re doing awesome, keep it up ';
 
   // code message function here.
-
+  function message (){
+    return welcomeText + firstname + ' ' + lastname + '.'
+  }
 
   //Uncommment this to return the value of your invoked message function
-  //return message();
+  return message();
 
 }
 
@@ -176,6 +200,7 @@ var module = (function() {
   // outside our lexical scope
   return {
     // Code here.
+    publicMethod: function(){ return privateMethod()}
   };
 
 })();
@@ -195,7 +220,16 @@ var secondLevelFriends = ["Anne", "Harry", "Quinton"];
 var allUsers = ["Tom", "Dick", "Harry", "Anne", "Quinton", "Katie", "Mary"];
 
 function findPotentialFriends(existingFriends) {
-
+return function (){ 
+  for(let i = 0; i < friends.length; i++)
+    for(let j = 0; j < allUsers.length; j++){
+    if(friends[i] !== allUsers[j]){
+      return true;
+    }else{
+      return false
+    }
+  }
+}
 }
 
 var isNotAFriend = findPotentialFriends( friends );
@@ -236,9 +270,7 @@ to 5. What we need to do is console.log(i) so that it logs like so:
 
 function timeOutCounter() {
   for (var i = 0; i <= 5; i++) {
-    setTimeout(function() {
-    	console.log(i)
-	}, i * 1000)
+ setTimeout(function(x) { return function() { console.log(x); }; }(i), 1000*i)
   }
 }
 timeOutCounter();
